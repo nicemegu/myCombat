@@ -28,25 +28,29 @@ export default {
 </script>
 <style lang="stylus" rel="stylesheet/stylus">
 .header
+  width 100%
+  height 50px
   display flex
   font-size 20px
-  position fixed
+  //position fixed
   display flex
   align-items center
-  justify-content space-between
-  top 0
+  justify-content space-around
+  //top 10px
   img
     width 70px
     height 25px
   .search
-    width 70%
+    width 55%
+    padding 0
   .btn
-    width 40px
-    height 24px
-    font-size 14px
-    line-height 26px
+    width 32px
+    height 18px
+    font-size 12px
+    line-height 18px
     text-align center
     background-color #fff
     border 1px solid #DD1A21
     border-radius 7px
+    color #DD1A21
 </style>

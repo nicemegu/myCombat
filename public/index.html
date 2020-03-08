@@ -1,15 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width,initial-scale=1.0">
-    <title><%= htmlWebpackPlugin.options.title %></title>
-    <link rel="stylesheet" href="./css/reset.css">
-    <link rel="stylesheet" href="./css/iconfont.css">
-  </head>
-  <body>
-    <!--设置移动端点击的时候延迟0.3s的js代码-->
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport"
+    content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0 user-scalable=no">
+  <title><%= htmlWebpackPlugin.options.title %></title>
+  <link rel="stylesheet" href="./css/reset.css">
+  <link rel="stylesheet" href="./css/iconfont.css">
+  <link rel="stylesheet" href="css/swiper.min.css">
+</head>
+
+<body>
+  <script src="js/swiper.min.js"></script>
+  <!--设置移动端点击的时候延迟0.3s的js代码-->
   <!--解决移动端点击事件0.3延迟问题: 使用fastclick库-->
   <script src="https://as.alipayobjects.com/g/component/fastclick/1.0.6/fastclick.js"></script>
   <script>
@@ -18,9 +23,9 @@
         FastClick.attach(document.body);
       }, false);
     }
-
   </script>
-    <div id="app"></div>
-    <!-- built files will be auto injected -->
-  </body>
+  <div id="app"></div>
+  <!-- built files will be auto injected -->
+</body>
+
 </html>
