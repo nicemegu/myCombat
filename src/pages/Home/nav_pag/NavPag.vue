@@ -27,6 +27,10 @@ export default {};
 <style lang='stylus' rel='stylesheet/stylus'>
 .Nav
   width 100%
+  position fixed
+  top 45px
+  z-index 2
+  background-color #fff
   .Tabs
     width 80%
     .tab

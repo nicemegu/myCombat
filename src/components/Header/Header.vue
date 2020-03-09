@@ -1,15 +1,15 @@
 <template>
   <header class="header">
-    <img
-      src="http://yanxuan-static.nosdn.127.net/hxm/yanxuan-wap/p/20161201/style/img/icon-normal/indexLogo-a90bdaae6b.png?imageView&type=webp"
-      alt=""
-    />
-    <van-search
-      v-model="value"
-      placeholder="请输入搜索关键词"
-      input-align="center"
-      class="search"
-    />
+    <slot name="left">
+      <img
+        src="http://yanxuan-static.nosdn.127.net/hxm/yanxuan-wap/p/20161201/style/img/icon-normal/indexLogo-a90bdaae6b.png?imageView&type=webp"
+        alt
+      />
+    </slot>
+    <slot name="middle"></slot>
+    <van-search v-model="value" placeholder="请输入搜索关键词" input-align="center" class="search" />
+    
+    <slot name="right"></slot>
     <div class="btn">登录</div>
   </header>
 </template>
@@ -32,11 +32,13 @@ export default {
   height 50px
   display flex
   font-size 20px
-  //position fixed
+  position fixed
   display flex
   align-items center
   justify-content space-around
-  //top 10px
+  top 0
+  z-index 2
+  background-color #fff
   img
     width 70px
     height 25px
