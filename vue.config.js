@@ -17,4 +17,18 @@ module.exports = {
       }
     },
   },
+  //配置数据代理，解决跨域问题
+  devServer: {
+    proxy: {
+      '/api': {
+        //目标地址
+        target: 'http://localhost:4000',
+        //是否跨域
+        changeOrigin: true,
+        pathRewrite: {
+          '^/api': ''
+        }
+      }
+    }
+  }
 }

@@ -4,6 +4,7 @@ import Vue from 'vue'
 import App from './App.vue'
 //引入路由器
 import router from './router'
+import store from './store/index'
 import '../tools/fit'
 //引入vue插件
 //设置是否提示信息
@@ -16,5 +17,6 @@ new Vue({
   //模板
   template:'<App />',
   //注册
-  router
+  router,
+  store
 })

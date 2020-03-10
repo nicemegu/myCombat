@@ -1,57 +1,32 @@
 <template>
   <div class="shop_list">
-    <img src="../imgs/shangping.jpg" alt="">
+    <img src="../imgs/shangping.jpg" alt="" />
     <div class="shoplist">
       <ul class="list">
-        <li>
-          <img src="../imgs/shangping.webp" alt="">
-          <span>精选好物15元起</span>
-        </li>
-        <li>
-          <img src="../imgs/shangping.webp" alt="">
-          <span>精选好物15元起</span>
-        </li>
-        <li>
-          <img src="../imgs/shangping.webp" alt="">
-          <span>精选好物15元起</span>
-        </li>
-        <li>
-          <img src="../imgs/shangping.webp" alt="">
-          <span>精选好物15元起</span>
-        </li>
-        <li>
-          <img src="../imgs/shangping.webp" alt="">
-          <span>精选好物15元起</span>
-        </li>
-        <li>
-          <img src="../imgs/shangping.webp" alt="">
-          <span>精选好物15元起</span>
-        </li>
-        <li>
-          <img src="../imgs/shangping.webp" alt="">
-          <span>精选好物15元起</span>
-        </li>
-        <li>
-          <img src="../imgs/shangping.webp" alt="">
-          <span>精选好物15元起</span>
-        </li>
-        <li>
-          <img src="../imgs/shangping.webp" alt="">
-          <span>精选好物15元起</span>
+        <li v-for="(cate,index) in obj.categoryList" :key="index">
+          <img :src="cate.bannerUrl" alt="" />
+          <span>{{cate.name}}</span>
         </li>
 
+       
       </ul>
     </div>
   </div>
 </template>
 <script>
-  export default {};
+export default {
+  name: "ShopList",
+  props: {
+    obj: Object
+  },
+  mounted() {}
+};
 </script>
-<style lang='stylus' rel='stylesheet/stylus'>
+<style lang="stylus" rel="stylesheet/stylus">
 .shop_list
   width 260px
   padding 15px
-  img 
+  img
     width 100%
     height 95px
   .shoplist
@@ -59,7 +34,7 @@
     margin-top 20px
     .list
       width 100%
-      display flex 
+      display flex
       flex-wrap wrap
       justify-content space-around
       li
@@ -70,10 +45,10 @@
         align-items center
         justify-content center
         font-size 13px
-        img 
+        img
           width 70px
           height 70px
-        span 
+        span
           width 70px
           height 39px
           text-align center

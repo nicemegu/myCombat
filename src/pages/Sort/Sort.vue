@@ -3,7 +3,6 @@
     <header>
       <span slot="middle">
         <van-search
-          v-model="value"
           placeholder="请输入搜索关键词"
           input-align="center"
           class="search"
@@ -12,19 +11,19 @@
     </header>
     <div class="contentlist">
       <div class="list_left">
-        <van-sidebar v-model="activeKey" >
-          <van-sidebar-item title="推荐专区" />
-          <van-sidebar-item title="宅家防护" />
-          <van-sidebar-item title="推荐专区" />
-          <van-sidebar-item title="宅家防护" />
-          <van-sidebar-item title="5" />
-          <van-sidebar-item title="6" />
-          <van-sidebar-item title="5" />
-          <van-sidebar-item title="5" />
+        <van-sidebar v-model="activeKey">
+          <van-sidebar-item
+            :title="sort.name"
+            v-for="(sort, index) in categoryL1List"
+            :key="index"
+            :v-model="index"
+            @click="changlist(`/sort?categoryId=${sort.id}`)"
+          />
         </van-sidebar>
       </div>
       <div>
-        <ShopList />
+        <!-- 右侧数据 -->
+        <ShopList :obj="obj"/>
       </div>
     </div>
   </div>
@@ -36,17 +35,46 @@ Vue.use(Search);
 Vue.use(Sidebar);
 Vue.use(SidebarItem);
 import header from "../../components/Header/Header";
-import ShopList from './ShopList/ShopList'
+import ShopList from "./ShopList/ShopList";
+//引入辅助函数
+import { mapState } from "vuex";
 export default {
-  name:'Sort',
-  data(){
+  name: "Sort",
+  data() {
     return {
-      activeKey: 0
+      activeKey: 0,
+      index: 0,
+      obj:{}
+    };
+  },
+  methods: {
+    changlist(path) {
+      if (this.$router.path !== path) {
+        this.$router.push(path); //ok;
+        //获取当前的id
+        const id = this.$route.query.categoryId;
+        //获取右边的整体数据
+        const result = this.cateLists
+        result.forEach((res)=>{
+          if(res.id==id){
+            this.obj = res
+          }
+        })
+      }
     }
   },
-  components:{
-    ShopList,
-    
+  mounted() {
+    this.$store.dispatch("Getsort");
+    this.$store.dispatch("Getcate");
+  },
+  computed: {
+    ...mapState({
+      categoryL1List: state => state.sort.categoryL1List,
+      cateLists: state => state.sort.cateLists
+    })
+  },
+  components: {
+    ShopList
   }
 };
 </script>

@@ -10,43 +10,58 @@ import GoodValue from '../pages/GoodValue/GoodValue.vue'
 import Cart from '../pages/Cart/Cart.vue'
 //个人
 import Personal from '../pages/Personal/Personal.vue'
+//搜索
+import Search from '../pages/Search/Search.vue'
+import ShopList from '../pages/Sort/ShopList/ShopList.vue'
+export default [{
+    path: '/home',
+    component: Home,
+    meta: {
+      isShowTabbar: true
+    }
+  },
+  {
+    path: '/sort',
+    component: Sort,
+    children: [{
+      path: '/sort?categoryId=:id',
+      component: ShopList,
+      meta: {
+        isShowTabbar: true
+      },
+    }
+  ],
+    meta: {
+      isShowTabbar: true
+    },
 
-export default [
+
+  },
   {
-    path:'/home',
-    component:Home,
-    meta:{
-      ishow:true
+    path: '/goodvalue',
+    component: GoodValue,
+    meta: {
+      isShowTabbar: true
     }
   },
   {
-    path:'/sort',
-    component:Sort,
-    meta:{
-      ishow:true
+    path: '/cart',
+    component: Cart,
+    meta: {
+      isShowTabbar: true
     }
   },
   {
-    path:'/goodvalue',
-    component:GoodValue,
-    meta:{
-      ishow:true
-    }
+    path: '/personal',
+    component: Personal
   },
   {
-    path:'/cart',
-    component:Cart,
-    meta:{
-      ishow:true
-    }
-  },
-  {
-    path:'/personal',
-    component:Personal
+    path: '/search',
+    component: Search
   },
   //重定向
   {
-    path:'/',
-    component:Home
+    path: '/',
+    redirect: '/home'
   }
 ]

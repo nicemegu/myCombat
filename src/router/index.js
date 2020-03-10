@@ -8,7 +8,7 @@ import routes from './routes'
 Vue.use(VueRouter)
 export default new VueRouter({
   //去掉地址栏上的#号
-  mode:'history',
+  mode: 'history',
   //注册
   routes
 })

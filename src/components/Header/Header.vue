@@ -7,10 +7,10 @@
       />
     </slot>
     <slot name="middle"></slot>
-    <van-search v-model="value" placeholder="请输入搜索关键词" input-align="center" class="search" />
+    <van-search v-model="value" placeholder="请输入搜索关键词" input-align="center" class="search"  disabled @click="$router.push('/search')"/>
     
     <slot name="right"></slot>
-    <div class="btn">登录</div>
+    <div class="btn" @click="$router.push('/personal')">登录</div>
   </header>
 </template>
 <script>
@@ -23,7 +23,8 @@ export default {
     return {
       value: ""
     };
-  }
+  },
+ 
 };
 </script>
 <style lang="stylus" rel="stylesheet/stylus">

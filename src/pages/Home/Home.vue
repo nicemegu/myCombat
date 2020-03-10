@@ -7,23 +7,11 @@
     <!-- 展示的小字，轮播图紧贴的地方 -->
     <div class="extend">
       <ul class="extendlist">
-        <li>
+        <li v-for="(policy ,index) in home.policyDescList" :key='index'>
           <img
-            src="https://yanxuan.nosdn.127.net/a03dd909803b9ac032eba58b7253a2f6.png"
+            :src="policy.icon"
             alt=""
-          /><a href="javaScript:,">网易自营品牌</a>
-        </li>
-        <li>
-          <img
-            src="https://yanxuan.nosdn.127.net/2d0402ffcd52b3ec3b07422681c42a89.png"
-            alt=""
-          /><a href="javaScript:,">30天无忧退货</a>
-        </li>
-        <li>
-          <img
-            src="https://yanxuan.nosdn.127.net/eb61ee48e8942dbd1784c9ee75ebe955.png"
-            alt=""
-          /><a href="javaScript:,">48小时快速退款</a>
+          /><a href="javaScript:,">{{policy.desc}}</a>
         </li>
       </ul>
     </div>
@@ -36,62 +24,14 @@
         :column-num="5"
       >
         <van-grid-item
-          text="新品首发"
-          icon="https://yanxuan.nosdn.127.net/c6fd8835a6400b7da7a016ad85506b69.png"
+          :text="king.text"
+          :icon="king.picUrl"
           border="false"
+          v-for="(king ,index) in kingKongModule.kingKongList"
+          :key="index"
         />
-        <van-grid-item
-          icon="https://yanxuan.nosdn.127.net/fede8b110c502ec5799702d5ec824792.png"
-          text="居家生活"
-          border="false"
-        />
-        <van-grid-item
-          icon="https://yanxuan.nosdn.127.net/896a3beac514ae8f40aafe028e5fec56.png"
-          text="服饰鞋包"
-          border="false"
-        />
-        <van-grid-item
-          icon="https://yanxuan.nosdn.127.net/37520d1204a0c55474021b43dac2a69e.png"
-          text="美食酒水"
-          icon-size="40px"
-          square="false"
-        />
-        <van-grid-item
-          icon="https://yanxuan.nosdn.127.net/6c3bd9d885c818b1f73e497335a68b47.png"
-          text="个人护理"
-          icon-size="40px"
-          square="false"
-        />
-        <van-grid-item
-          icon="https://yanxuan.nosdn.127.net/559d2a240ec20b096590a902217009ff.png"
-          text="母婴亲子"
-          icon-size="40px"
-          square="false"
-        />
-        <van-grid-item
-          icon="https://yanxuan.nosdn.127.net/5c088559ebcc3f0ffcda663f04dfbeb2.png"
-          text="运动旅行"
-          icon-size="40px"
-          square="false"
-        />
-        <van-grid-item
-          icon="https://yanxuan.nosdn.127.net/fbca8e1f2948f0c09fc7672c2c125384.png"
-          text="数码家电"
-          icon-size="40px"
-          square="false"
-        />
-        <van-grid-item
-          icon="https://yanxuan.nosdn.127.net/f7281169d4e82d5d8d52aa1fec83fe01.png"
-          text="全球特色"
-          icon-size="40px"
-          square="false"
-        />
-        <van-grid-item
-          icon="https://yanxuan.nosdn.127.net/12e8efd15b9b210ab156a7ee9b340548.gif"
-          text="好货抄底"
-          icon-size="40px"
-          square="false"
-        />
+      
+       
       </van-grid>
     </div>
     <!-- 活动区域 -->
@@ -214,7 +154,7 @@
         <div class="title">
           <div class="title_left">
             <span>限时购</span>
-            <van-count-down :time="700000">
+            <van-count-down :time="flashSaleModule.remainTime">
               <template v-slot="timeData">
                 <span class="item">{{ timeData.hours }}</span> :
                 <span class="item">{{ timeData.minutes }}</span
@@ -227,35 +167,10 @@
         </div>
         <div class="timetobuylist">
           <ul class="list">
-            <li>
-              <img src="./imgs/kuzi.png" alt="" />
-              <span>¥143</span>
-              <span class="list_discount">¥199</span>
-            </li>
-            <li>
-              <img src="./imgs/kuzi.png" alt="" />
-              <span>¥143</span>
-              <span class="list_discount">¥199</span>
-            </li>
-            <li>
-              <img src="./imgs/kuzi.png" alt="" />
-              <span>¥143</span>
-              <span class="list_discount">¥199</span>
-            </li>
-            <li>
-              <img src="./imgs/kuzi.png" alt="" />
-              <span>¥143</span>
-              <span class="list_discount">¥199</span>
-            </li>
-            <li>
-              <img src="./imgs/kuzi.png" alt="" />
-              <span>¥143</span>
-              <span class="list_discount">¥199</span>
-            </li>
-            <li>
-              <img src="./imgs/kuzi.png" alt="" />
-              <span>¥143</span>
-              <span class="list_discount">¥199</span>
+            <li v-for="(flashSale,index) in flashSaleModule.itemList" :key="index">
+              <img :src="flashSale.picUrl" alt="" />
+              <span>¥{{flashSale.activityPrice}}</span>
+              <span class="list_discount">¥{{flashSale.originPrice}}</span>
             </li>
           </ul>
         </div>
@@ -372,12 +287,25 @@ import Swiper from "../../components/Swiper/Swiper";
 import Header from "../../components/Header/Header";
 //引入nav
 import NavPag from "./nav_pag/NavPag";
+//引入辅助函数
+import {mapState} from 'vuex'
 export default {
   name: "Home",
   data() {
     return {
       timeData: []
     };
+  },
+  mounted(){
+    this.$store.dispatch('Gethome')
+  },
+  computed:{
+    ...mapState({
+      home:state=>state.home.homes,
+      kingKongModule:state=>state.home.kingKongModule,
+      flashSaleModule:state=>state.home.flashSaleModule,
+      
+    })
   },
   components: {
     Header,
