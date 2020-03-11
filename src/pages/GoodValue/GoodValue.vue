@@ -23,100 +23,15 @@
           <div class="swiper">
             <div class="swiper-container">
               <div class="swiper-wrapper">
-                <div class="swiper-slide">
+                <div
+                  class="swiper-slide"
+                  v-for="(slide, index) in swiperimg"
+                  :key="index"
+                >
                   <div class="swiper_list">
-                    <img src="./imgs/1.png" alt="" />
-                    <span class="list_text1">9.9超值</span>
-                    <span class="list_text2">定价直降</span>
-                  </div>
-                  <div class="swiper_list">
-                    <img src="./imgs/1.png" alt="" />
-                    <span class="list_text1">9.9超值</span>
-                    <span class="list_text2">定价直降</span>
-                  </div>
-                </div>
-                <div class="swiper-slide">
-                  <div class="swiper_list">
-                    <img src="./imgs/1.png" alt="" />
-                    <span class="list_text1">9.9超值</span>
-                    <span class="list_text2">定价直降</span>
-                  </div>
-                  <div class="swiper_list">
-                    <img src="./imgs/1.png" alt="" />
-                    <span class="list_text1">9.9超值</span>
-                    <span class="list_text2">定价直降</span>
-                  </div>
-                </div>
-                <div class="swiper-slide">
-                  <div class="swiper_list">
-                    <img src="./imgs/1.png" alt="" />
-                    <span class="list_text1">9.9超值</span>
-                    <span class="list_text2">定价直降</span>
-                  </div>
-                  <div class="swiper_list">
-                    <img src="./imgs/1.png" alt="" />
-                    <span class="list_text1">9.9超值</span>
-                    <span class="list_text2">定价直降</span>
-                  </div>
-                </div>
-                <div class="swiper-slide">
-                  <div class="swiper_list">
-                    <img src="./imgs/1.png" alt="" />
-                    <span class="list_text1">9.9超值</span>
-                    <span class="list_text2">定价直降</span>
-                  </div>
-                  <div class="swiper_list">
-                    <img src="./imgs/1.png" alt="" />
-                    <span class="list_text1">9.9超值</span>
-                    <span class="list_text2">定价直降</span>
-                  </div>
-                </div>
-                <div class="swiper-slide">
-                  <div class="swiper_list">
-                    <img src="./imgs/1.png" alt="" />
-                    <span class="list_text1">9.9超值</span>
-                    <span class="list_text2">定价直降</span>
-                  </div>
-                  <div class="swiper_list">
-                    <img src="./imgs/1.png" alt="" />
-                    <span class="list_text1">9.9超值</span>
-                    <span class="list_text2">定价直降</span>
-                  </div>
-                </div>
-                <div class="swiper-slide">
-                  <div class="swiper_list">
-                    <img src="./imgs/1.png" alt="" />
-                    <span class="list_text1">9.9超值</span>
-                    <span class="list_text2">定价直降</span>
-                  </div>
-                  <div class="swiper_list">
-                    <img src="./imgs/1.png" alt="" />
-                    <span class="list_text1">9.9超值</span>
-                    <span class="list_text2">定价直降</span>
-                  </div>
-                </div>
-                <div class="swiper-slide">
-                  <div class="swiper_list">
-                    <img src="./imgs/1.png" alt="" />
-                    <span class="list_text1">9.9超值</span>
-                    <span class="list_text2">定价直降</span>
-                  </div>
-                  <div class="swiper_list">
-                    <img src="./imgs/1.png" alt="" />
-                    <span class="list_text1">9.9超值</span>
-                    <span class="list_text2">定价直降</span>
-                  </div>
-                </div>
-                <div class="swiper-slide">
-                  <div class="swiper_list">
-                    <img src="./imgs/1.png" alt="" />
-                    <span class="list_text1">9.9超值</span>
-                    <span class="list_text2">定价直降</span>
-                  </div>
-                  <div class="swiper_list">
-                    <img src="./imgs/1.png" alt="" />
-                    <span class="list_text1">9.9超值</span>
-                    <span class="list_text2">定价直降</span>
+                    <img :src="slide.picUrl" alt="" />
+                    <span class="list_text1">{{ slide.mainTitle }}</span>
+                    <span class="list_text2">{{ slide.viceTitle }}</span>
                   </div>
                 </div>
               </div>
@@ -171,18 +86,31 @@ import Swiper from "swiper";
 import Vue from "vue";
 import { Icon } from "vant";
 Vue.use(Icon);
+//引入辅助函数
+import { mapState } from "vuex";
 export default {
   name: "GoodValue",
-  mounted() {
-    var swiper = new Swiper(".swiper-container", {
-      direction: "horizontal", // 垂直切换选项
-      slidesPerView: 4,//一个页面上展示多少个
-      slidesPerGroup: 1,//每次滑动的距离
-      scrollbar: {
-        el: ".swiper-scrollbar",
-        hide: true,
-      }
+  async mounted() {
+    await this.$store.dispatch("Getswiperimg");
+    this.$nextTick(() => {
+      var swiper = new Swiper(".swiper-container", {
+        direction: "horizontal", // 垂直切换选项
+        slidesPerView: 4, //一个页面上展示多少个
+        slidesPerGroup: 1, //每次滑动的距离
+        slidesPerColumn: 2, //显示2行
+        observeParents: true,//在加载时初始化 父级元素，解决渲染完成后轮播图展示右边的问题
+        observer: true,
+        scrollbar: {
+          el: ".swiper-scrollbar",
+          hide: true
+        }
+      });
     });
+  },
+  computed: {
+    ...mapState({
+      swiperimg: state => state.goodvalue.swiperimg
+    })
   }
 };
 </script>
@@ -197,8 +125,8 @@ export default {
     width 100%
     padding-top 35px
     box-sizing border-box
-    background-image url('./imgs/bg.png') 
-    background-size 100% 100% 
+    background-image url('./imgs/bg.png')
+    background-size 100% 100%
     .content_top_title
       width 100%
       box-sizing border-box
@@ -223,12 +151,13 @@ export default {
         margin-top 0
         .swiper-container
           width 100%
-          height 240px
+          height 220px
           .swiper-wrapper
             width 200%
             .swiper-slide
               font-size 16px
               width 88px
+              height 100px
               .swiper_list
                 width 100%
                 height 100px

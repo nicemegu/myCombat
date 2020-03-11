@@ -19,6 +19,11 @@ export const reqSoltright =()=>ajax({
   url:BASE+`/sort:id`
 })
 
+//值得买轮播图数据
+export const reqSwiper =()=>ajax({
+  method:'GET',
+  url:BASE+`/goodvalue`
+})
 
 // = ajax({
 //   method: 'GET',

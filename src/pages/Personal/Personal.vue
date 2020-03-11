@@ -1,9 +1,11 @@
 <template>
-  <div>
+  <div class="persionout">
     <div class="title">
-      <span><van-icon name="wap-home-o" size="28"/></span>
+      <span
+        ><van-icon name="wap-home-o" size="28" @click="$router.push('/home')"
+      /></span>
       <img
-        src="http://yanxuan-static.nosdn.127.net/hxm/yanxuan-wap/p/20161201/style/img/icon-normal/indexLogo-a90bdaae6b.png?imageView&type=webp"
+        src="http://yanxuan-static.nosdn.127.net/hxm/yanxuan-wap/p/20161201/style/img/icon-normal/indexLogo-a90bdaae6b.png"
         alt=""
       />
       <div class="title_right">
@@ -16,7 +18,9 @@
       <div class="logintype">
         <div class="phone type">
           <span class="phonelogo"></span>
-          <span>手机号快捷登录</span>
+          <span @click="$router.replace('/personal/loginp')"
+            >手机号快捷登录</span
+          >
         </div>
         <div class="mail type">
           <span class="maillogo"></span>
@@ -59,7 +63,7 @@ export default {};
 .personalcontent
   margin 0
   width 100%
-  height 580px
+  height 622px
   display flex
   flex-direction column
   justify-content space-around
@@ -85,20 +89,20 @@ export default {};
         width 20px
         height 20px
         background-image url(''./imgs/login24.webp'')
-        background-size 100% 
+        background-size 100%
         background-position 0 -25px
         margin-right 8px
       .maillogo
         width 20px
         height 20px
         background-image url(''./imgs/login24.webp'')
-        background-size 100% 
+        background-size 100%
         background-position 0 0px
         margin-right 8px
       &.phone
         background-color #dd1a21
         margin-bottom 16px
-        
+
       &.mail
         background-color #fff
         color #dd1a21
@@ -134,5 +138,4 @@ export default {};
     .qqtype
       border-left 1px solid #000
       border-right 1px solid #000
-      
 </style>

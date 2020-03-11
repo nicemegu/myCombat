@@ -16,7 +16,6 @@
             :title="sort.name"
             v-for="(sort, index) in categoryL1List"
             :key="index"
-            :v-model="index"
             @click="changlist(`/sort?categoryId=${sort.id}`)"
           />
         </van-sidebar>

@@ -1,30 +1,62 @@
 <template>
-<div class="Nav">
- <van-tabs class="Tabs">
-    <van-tab class="tab" title="推荐"></van-tab>
-    <van-tab class="tab" title="居家生活"></van-tab>
-    <van-tab class="tab" title="服饰鞋包"></van-tab>
-    <van-tab class="tab" title="美食酒水"></van-tab>
-    <van-tab class="tab" title="个人清洁"></van-tab>
-    <van-tab class="tab" title="母婴亲子"></van-tab>
-    <van-tab class="tab" title="运动旅行"></van-tab>
-    <van-tab class="tab" title="数码家电"></van-tab>
-    <van-tab class="tab" title="全球特色"></van-tab>
-  </van-tabs>
+  <div class="Nav">
+    <van-tabs class="Tabs" @click="changetab">
+      <van-tab class="tab" title="推荐"></van-tab>
+      <van-tab
+        class="tab"
+        :title="cate.name"
+        :name="cate.id"
+        v-for="(cate, index) in cates"
+        :key="index"
+      ></van-tab>
+    </van-tabs>
 
-</div>
- 
+  </div>
 </template>
 <script>
-import Vue from 'vue';
-import { Tab, Tabs ,Popup} from 'vant';
+//引入
+import Vue from "vue";
+import { Tab, Tabs, Popup } from "vant";
 
 Vue.use(Tab);
 Vue.use(Tabs);
 Vue.use(Popup);
-export default {};
+//引入辅助函数
+import { mapState } from "vuex";
+export default {
+  name: "NavPag",
+  data() {
+    return {
+      catedata: {}
+    };
+  },
+  methods: {
+    changetab(name, title) {
+      let id = name
+      console.log(id);
+        //获取整体数据
+        const result = this.cates;
+        //循环遍历 得到要传入的对象
+        result.forEach(res => {
+          //根据id值获取数据
+          if (res.id == id) {
+            this.catedata = res;
+          }
+        });
+        console.log(this.catedata)
+    }
+  },
+  components:{
+   
+  },
+  computed: {
+    ...mapState({
+      cates: state => state.home.cates
+    })
+  }
+};
 </script>
-<style lang='stylus' rel='stylesheet/stylus'>
+<style lang="stylus" rel="stylesheet/stylus">
 .Nav
   width 100%
   position fixed

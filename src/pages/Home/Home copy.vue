@@ -4,7 +4,6 @@
     <Header />
 
     <div class="Nav">
-
       <van-tabs class="Tabs" @click="changetab">
         <van-tab class="tab" title="推荐"></van-tab>
         <van-tab
@@ -13,7 +12,6 @@
           :name="cate.id"
           v-for="(cate, index) in cates"
           :key="index"
-          
         ></van-tab>
       </van-tabs>
     </div>
@@ -43,13 +41,12 @@ export default {
   name: "Home",
   data() {
     return {
-      catedata: [],
+      catedata: {},
       isShowindex: true
     };
   },
   methods: {
     changetab(name, title) {
-
       //判断是显示index
       if (name !== 0) {
         this.isShowindex = false;
@@ -64,13 +61,11 @@ export default {
       result.forEach(res => {
         //根据id值获取数据
         if (res.id == id) {
-          console.log(res)
-          this.catedata = res.subCateList;
-          console.log(this.catedata)
+          this.catedata = res;
         }
       });
 
-    },
+    }
   },
   computed: {
     ...mapState({
@@ -97,11 +92,6 @@ export default {
 
     HomeContent,
     Cate
-  },
-  watch:{
-    catedata(){
-
-    }
   }
 };
 </script>

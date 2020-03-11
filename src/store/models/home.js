@@ -6,22 +6,31 @@ import {
   reqHome
 } from '../../api/index'
 const state = {
-  //小图标
+  
+  //首页的数据
   homes: {},
   kingKongModule:[],
   newshop:[],
   flashSaleModule:{},
-  indexActivityModule:[]
+  indexActivityModule:[],
+
+  //首页导航栏的数据
+  cates:[]
 
 }
 const mutations = {
   //小图标
   [RECIVE_HOME](state, homes) {
-    state.homes = homes
-    state.kingKongModule =homes.kingKongModule
-    state.newshop =homes.newItemList
-    state.flashSaleModule=homes.flashSaleModule
-    state.indexActivityModule=homes.indexActivityModule
+    const {index,indexCateModule} = homes
+    state.homes = index
+    state.kingKongModule =index.kingKongModule
+    state.newshop =index.newItemList
+    state.flashSaleModule=index.flashSaleModule
+    state.indexActivityModule=index.indexActivityModule
+
+
+    //首页nav数据
+    state.cates = indexCateModule
   }
 }
 const actions = {

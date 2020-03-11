@@ -23,7 +23,7 @@
     <div class="login">
       <img src="./imgs/cart.png" alt="">
       <span>去添加点什么吧</span>
-      <div class="btn">登录</div>
+      <div class="btn" @click="$router.push('/personal')">登录</div>
     </div>
   </div>
 </template>
